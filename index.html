@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ScaleUp Nepal — Apply Now</title>
+<link rel="icon" type="image/jpeg" href="assets/scaleup-logo.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy-900: #050a26;
+    --navy-800: #0a1340;
+    --navy-700: #131c52;
+    --navy-600: #1d3a8a;
+    --navy-500: #2a4fb8;
+    --red: #E32636;
+    --red-soft: #ff3d54;
+    --ink: #ffffff;
+    --ink-dim: rgba(255,255,255,0.72);
+    --ink-faint: rgba(255,255,255,0.5);
+    --hairline: rgba(255,255,255,0.14);
+    --hairline-strong: rgba(255,255,255,0.28);
+    --card-bg: rgba(255,255,255,0.04);
+    --card-bg-hover: rgba(255,255,255,0.07);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--navy-900);
+    min-height: 100vh;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Layered gradient background matching theme image */
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 60% 50% at 0% 0%, rgba(227, 38, 54, 0.28), transparent 60%),
+      radial-gradient(ellipse 50% 60% at 100% 100%, rgba(45, 100, 255, 0.32), transparent 60%),
+      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(45, 60, 160, 0.4), transparent 70%),
+      linear-gradient(135deg, #0a1340 0%, #1a1d52 50%, #0a1340 100%);
+  }
+
+  /* Subtle vertical stripes overlay like in theme image */
+  .bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 80px,
+      rgba(255,255,255,0.012) 80px,
+      rgba(255,255,255,0.012) 81px
+    );
+    opacity: 0.6;
+  }
+
+  /* Decorative orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .orb-1 {
+    width: 600px; height: 600px;
+    top: -200px; right: -200px;
+    background: radial-gradient(circle, rgba(45, 100, 255, 0.25), transparent 70%);
+  }
+  .orb-2 {
+    width: 500px; height: 500px;
+    bottom: -150px; left: -150px;
+    background: radial-gradient(circle, rgba(80, 50, 200, 0.22), transparent 70%);
+  }
+
+  /* Container */
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 32px 64px;
+    position: relative;
+  }
+
+  /* Co-brand bar */
+  .cobrand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 0 12px;
+    flex-wrap: wrap;
+  }
+  .cobrand-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ink-dim);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .flag-mini {
+    width: 44px;
+    height: 28px;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+    background: #b22234;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+  }
+  .flag-mini::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        180deg,
+        #b22234 0, #b22234 2.15px,
+        #fff 2.15px, #fff 4.3px
+      );
+  }
+  .flag-mini::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 44%;
+    height: 53.8%;
+    background: #3c3b6e;
+  }
+  .cobrand-divider {
+    width: 1px;
+    height: 36px;
+    background: var(--hairline-strong);
+  }
+  .aeif-badge {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #0a1226;
+    border: 1px solid var(--hairline-strong);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 7px;
+    letter-spacing: 0.1em;
+    line-height: 1.15;
+    color: var(--ink);
+    text-align: center;
+    padding: 2px;
+  }
+  .aeif-badge .yr {
+    font-size: 6.5px;
+    color: var(--ink-faint);
+    margin-bottom: 1px;
+  }
+  .aeif-badge .lg {
+    font-size: 7.5px;
+    font-weight: 700;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 36px 0 56px;
+  }
+  .logo-mark {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    margin: 0 auto 28px;
+    display: block;
+    filter: drop-shadow(0 8px 40px rgba(45, 100, 255, 0.35));
+  }
+  .tagline {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink-dim);
+    max-width: 640px;
+    margin: 0 auto 12px;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 16px;
+    padding: 6px 14px;
+    border: 1px solid rgba(227, 38, 54, 0.35);
+    border-radius: 999px;
+    background: rgba(227, 38, 54, 0.08);
+  }
+  .eyebrow .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 8px var(--red);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  /* Section heading */
+  .section-head {
+    text-align: center;
+    margin: 16px 0 32px;
+  }
+  .section-head h2 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .section-head h2 .accent {
+    color: var(--red-soft);
+  }
+  .section-head p {
+    margin: 0;
+    color: var(--ink-dim);
+    font-size: 15px;
+  }
+
+  /* Cards grid */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 30px 28px;
+    border-radius: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--hairline);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    min-height: 220px;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--red) 0%, var(--navy-500) 100%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(227, 38, 54, 0.18), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    background: var(--card-bg-hover);
+    border-color: var(--hairline-strong);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .card:hover::before { opacity: 1; }
+  .card:hover::after {
+    opacity: 1;
+    transform: translate(-10px, 10px);
+  }
+
+  .card-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+  .card-tag .num {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--hairline);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--ink-dim);
+    font-weight: 700;
+  }
+  .card h3 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 4px;
+    line-height: 1.1;
+  }
+  .card h3 .sub {
+    color: var(--red-soft);
+  }
+  .card-locale {
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin: 0 0 auto;
+  }
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--hairline);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    width: fit-content;
+    transition: all 0.25s ease;
+  }
+  .card:hover .card-cta {
+    background: var(--red);
+    border-color: var(--red);
+    transform: translateX(2px);
+  }
+  .card-cta svg {
+    transition: transform 0.25s ease;
+  }
+  .card:hover .card-cta svg {
+    transform: translateX(4px);
+  }
+
+  /* Info strip */
+  .info-strip {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--hairline);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+  }
+  .info-cell {
+    padding: 22px 24px;
+    background: rgba(10, 15, 50, 0.5);
+    backdrop-filter: blur(12px);
+  }
+  .info-cell .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px;
+  }
+  .info-cell .value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .footer-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .footer-row span {
+    color: var(--hairline-strong);
+  }
+
+  /* Responsive */
+  @media (max-width: 760px) {
+    .container { padding: 24px 18px 48px; }
+    .cobrand { gap: 14px; padding: 16px 0 8px; }
+    .cobrand-divider { display: none; }
+    .hero { padding: 24px 0 40px; }
+    .logo-mark { max-width: 340px; margin-bottom: 20px; }
+    .tagline { font-size: 15px; }
+    .section-head h2 { font-size: 22px; }
+    .cards { grid-template-columns: 1fr; gap: 14px; }
+    .card { padding: 26px 24px 22px; min-height: 180px; }
+    .card h3 { font-size: 26px; }
+    .info-strip { grid-template-columns: 1fr; gap: 1px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="container">
+
+  <!-- Co-brand bar -->
+  <div class="cobrand">
+    <div class="cobrand-item">
+      <div class="flag-mini" aria-hidden="true"></div>
+      <span>U.S. Embassy Nepal</span>
+    </div>
+    <div class="cobrand-divider"></div>
+    <div class="cobrand-item">
+      <div class="aeif-badge" aria-hidden="true">
+        <span class="yr">2025</span>
+        <span class="lg">ALUMNI</span>
+        <span>ENGAGEMENT</span>
+        <span>INNOVATION</span>
+        <span>FUND</span>
+      </div>
+      <span>Alumni Engagement<br/>Innovation Fund</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="eyebrow"><span class="dot"></span>Applications Open · 2025 Cohort</span>
+    <img class="logo-mark" src="assets/scaleup-logo.png" alt="ScaleUp Nepal" />
+    <p class="tagline">
+      A four-city initiative empowering early-stage entrepreneurs across Nepal through mentorship, training, and a growing network of changemakers.
+    </p>
+  </section>
+
+  <!-- Section heading -->
+  <div class="section-head">
+    <h2>Apply to <span class="accent">your nearest cohort</span></h2>
+    <p>Choose a location to open its application form.</p>
+  </div>
+
+  <!-- Cards -->
+  <div class="cards">
+
+    <a class="card" href="https://forms.gle/5mEmXYyjhQEvdSz1A" target="_blank" rel="noopener">
+      <div class="card-tag"><span class="num">01</span><span>Far-Western Region</span></div>
+      <h3>ScaleUp <span class="sub">Dhangadi</span></h3>
+      <p class="card-locale">Sudurpashchim Province · Kailali District</p>
+      <span class="card-cta">
+        Open application
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/>
+          <path d="M13 6l6 6-6 6"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="card" href="https://forms.gle/pZazfWZs8QNPZX847" target="_blank" rel="noopener">
+      <div class="card-tag"><span class="num">02</span><span>Lumbini Region</span></div>
+      <h3>ScaleUp <span class="sub">Butwal</span></h3>
+      <p class="card-locale">Lumbini Province · Rupandehi District</p>
+      <span class="card-cta">
+        Open application
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/>
+          <path d="M13 6l6 6-6 6"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="card" href="https://forms.gle/uVQJifwriLN6JYcB9" target="_blank" rel="noopener">
+      <div class="card-tag"><span class="num">03</span><span>Gandaki Region</span></div>
+      <h3>ScaleUp <span class="sub">Pokhara</span></h3>
+      <p class="card-locale">Gandaki Province · Kaski District</p>
+      <span class="card-cta">
+        Open application
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/>
+          <path d="M13 6l6 6-6 6"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="card" href="https://forms.gle/3KxjuKxXgoQfPGMC8" target="_blank" rel="noopener">
+      <div class="card-tag"><span class="num">04</span><span>Karnali Region</span></div>
+      <h3>ScaleUp <span class="sub">Surkhet</span></h3>
+      <p class="card-locale">Karnali Province · Surkhet District</p>
+      <span class="card-cta">
+        Open application
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/>
+          <path d="M13 6l6 6-6 6"/>
+        </svg>
+      </span>
+    </a>
+
+  </div>
+
+  <!-- Info strip -->
+  <div class="info-strip">
+    <div class="info-cell">
+      <div class="label">Who can apply</div>
+      <div class="value">Early-stage founders &amp; aspiring entrepreneurs from any of the four host regions.</div>
+    </div>
+    <div class="info-cell">
+      <div class="label">What's included</div>
+      <div class="value">Hands-on training, mentor pairing, peer cohort, and pitch opportunities.</div>
+    </div>
+    <div class="info-cell">
+      <div class="label">Cost</div>
+      <div class="value">Fully funded — no fee for selected participants.</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-row">
+      <span>ScaleUp Nepal © 2025</span>
+      <span>·</span>
+      <span>Supported by the Alumni Engagement Innovation Fund</span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
